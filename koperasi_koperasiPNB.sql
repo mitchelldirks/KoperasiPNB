@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2020 at 07:56 AM
+-- Generation Time: Apr 23, 2020 at 07:19 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.3.2
 
@@ -50,9 +50,6 @@ INSERT INTO `tbl_anggota` (`nik`, `nama`, `alamat`, `pekerjaan`, `gaji_perbulan`
 ('3275021603980017', 'Mitchell Marcel', 'Nowhere', 'P001', 1500000, 100),
 ('3277010908980002', 'Ilham Gibran Achmad Mudzakir', 'Cimahi', 'P001', 8000000, 30);
 
---
--- Triggers `tbl_anggota`
---
 -- --------------------------------------------------------
 
 --
@@ -74,7 +71,8 @@ CREATE TABLE `tbl_angsuran` (
 
 INSERT INTO `tbl_angsuran` (`id_angsuran`, `id_transaksi`, `harga_tambahan`, `dp`, `tgl_awal`, `tgl_lunas`) VALUES
 (1, 1, 16500000, 2000000, '2017-12-31', '2018-12-31'),
-(5, 5, 76675068, 0, '2020-04-20', '2021-04-20');
+(5, 5, 76675068, 0, '2020-04-20', '2021-04-20'),
+(12, 12, 84000, 0, '2020-04-22', '2020-07-22');
 
 -- --------------------------------------------------------
 
@@ -96,12 +94,12 @@ CREATE TABLE `tbl_barang` (
 --
 
 INSERT INTO `tbl_barang` (`id_barang`, `nama`, `kategori`, `perkiraan_harga`, `gambar`, `spesifikasi`) VALUES
-('$id', '$nama', '$kat', 0, '$gambar', '$spec'),
 ('B00001', 'Motor Honda', 'K002', 20000000, NULL, 'Speedforce Barry Allen'),
 ('B00002', 'sdasdas', 'K001', 12312, 'lenovo-laptop-yoga-920-feature-4.jpg', 'fsdfadsfsfsafasfsdfsadfdasfad'),
 ('B00003', 'Lenovo Yoga 920', 'K001', 14000000, 'lenovo-laptop-yoga-920-feature-4.jpg', '1.8GHz Intel Core i7-8550U (4GHz boost) 4 cores, 8 threads'),
 ('B00006', 'asd', 'K001', 11, 'nHBfsgABPwAAAAQAJKXB_gAAjFk.jpg', 'asd'),
-('B00008', 'Antam Fine Gold 10gr', 'K004', 12999999, 'nHBfsgABPwAAAAQAJKXB_gAAjFk.jpg', 'Antam Emas Logam Mulia - 10gr');
+('B00008', 'Antam Fine Gold 10gr', 'K004', 12999999, 'nHBfsgABPwAAAAQAJKXB_gAAjFk.jpg', 'Antam Emas Logam Mulia - 10gr'),
+('B00010', 'Kaos Soccer Unsada 2018', '0', 80000, '30884553_162450217755228_5581445743593390080_n.jpg', 'Cotton combed 30s');
 
 -- --------------------------------------------------------
 
@@ -125,7 +123,10 @@ INSERT INTO `tbl_detail_angsuran` (`id_detail`, `id_angsuran`, `tgl_angsuran`, `
 (2, 1, '2020-04-19 23:07:53.508011', 1500000),
 (3, 1, '2020-04-19 23:08:07.703823', 1600000),
 (4, 5, '2020-04-20 02:19:10.162438', 7000000),
-(5, 5, '2020-04-20 02:19:19.606978', 7000000);
+(5, 5, '2020-04-20 02:19:19.606978', 7000000),
+(6, 12, '2020-04-22 13:17:39.923120', 28000),
+(7, 12, '2020-04-22 13:17:46.815514', 28000),
+(8, 12, '2020-04-22 13:17:53.013869', 28000);
 
 -- --------------------------------------------------------
 
@@ -146,7 +147,7 @@ CREATE TABLE `tbl_dokumen` (
 --
 
 INSERT INTO `tbl_dokumen` (`nik`, `KTP`, `KK`, `Ijazah`, `ATM`) VALUES
-('1111111111111111', '1111111111111111IMG20191107134958(1).jpg', '1111111111111111Untitled-1_1.png', '1111111111111111logo-koperasi-baru-png.png', '1111111111111111kotlin_800x320.png');
+('1111111111111111', '1111111111111111WhatsApp Image 2019-06-09 at 23.15.04(1).jpeg', '1111111111111111WhatsApp Image 2019-11-26 at 7.33.50 AM.jpeg', '1111111111111111WhatsApp Image 2019-09-02 at 13.21.54.jpeg', '1111111111111111kotlin_800x320.png');
 
 -- --------------------------------------------------------
 
@@ -214,8 +215,8 @@ INSERT INTO `tbl_pengajuan` (`id_pengajuan`, `tgl_pengajuan`, `pengaju`, `barang
 (1, '2017-12-21 05:16:59.424191', '3273050403980002', 'B00002', 'sadasldjaslkdjaslk', 12, 2),
 (4, '2017-12-27 06:08:47.534435', '3273050403980002', 'B00003', 'Buat Main Minesweeper', 12, 3),
 (14, '2020-04-20 01:38:48.753941', '3275021603980017', 'B00006', 'asd', 12, 2),
-(20, '2020-04-20 02:06:24.556648', '3275021603980017', '$id', '$untuk', 0, 0),
-(21, '2020-04-20 02:07:34.260634', '3275021603980017', 'B00008', 'Investasi', 12, 3);
+(21, '2020-04-20 02:07:34.260634', '3275021603980017', 'B00008', 'Investasi', 12, 3),
+(22, '2020-04-21 12:52:24.039548', '1111111111111111', 'B00010', 'Sandang', 3, 3);
 
 -- --------------------------------------------------------
 
@@ -238,10 +239,8 @@ CREATE TABLE `tbl_transaksi` (
 
 INSERT INTO `tbl_transaksi` (`id_transaksi`, `tgl_transaksi`, `pengajuan`, `harga_asli`, `banyak_angsuran`, `status`) VALUES
 (1, '2017-12-31 14:51:51.987178', 4, 15000000, 12, 0),
-(2, '2020-04-19 23:43:23.229824', 4, 15, 12, 0),
-(3, '2020-04-19 23:43:54.304601', 4, 15, 12, 0),
-(4, '2020-04-19 23:44:00.146935', 4, 15, 12, 0),
-(5, '2020-04-20 02:18:15.437308', 21, 7698300, 12, 0);
+(5, '2020-04-20 02:18:15.437308', 21, 7698300, 12, 0),
+(12, '2020-04-22 13:17:19.599957', 22, 80000, 3, 1);
 
 --
 -- Triggers `tbl_transaksi`
@@ -349,25 +348,25 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_angsuran`
 --
 ALTER TABLE `tbl_angsuran`
-  MODIFY `id_angsuran` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_angsuran` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_detail_angsuran`
 --
 ALTER TABLE `tbl_detail_angsuran`
-  MODIFY `id_detail` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_detail` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_pengajuan`
 --
 ALTER TABLE `tbl_pengajuan`
-  MODIFY `id_pengajuan` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_pengajuan` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_transaksi`
 --
 ALTER TABLE `tbl_transaksi`
-  MODIFY `id_transaksi` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_transaksi` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
